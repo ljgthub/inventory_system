@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management System</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/bc44e66a1b.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -23,44 +23,42 @@
         <i class="fa-solid fa-search"></i>
         <input type="text" id="inp" style="border: none; width: 90%; height: 100%; margin-left: 10px;">
     </div>
-    <div id="item_form" class="item_form_show">
+
+    <!-- Form for new item -->
+    <form id="item_form" class="item_form_show" action="script.php" method="POST" enctype="multipart/form-data">
         <h3>New Item</h3>
         <div id="pic">
             <img src="" alt="" style="width: 80%; height: 150px;">
             <a style="font-size: 13px; font-weight: lighter;">(optional)</a> <br>
-            <button class="btn">Upload Image</button>
+            <button class="btn" id="upload_image_btn" type="button">Upload Image</button>
+            <input type="file" name="image" id="image_input" style="display: none;">
         </div>
         <div style="margin-top: 50px;">
-            <label for="">Item Name: </label> <br>
-            <input type="text" name="" id="">
+            <label for="name">Item Name: </label> <br>
+            <input type="text" name="name" id="name" required>
         </div>
         <div>
-            <label for="">Item Type: </label> <br>
-            <input type="text" name="" id="">
+            <label for="type">Item Type: </label> <br>
+            <input type="text" name="type" id="type" required>
         </div>
         <div>
-            <label for="">Stocks:</label> <br>
-            <input type="text" name="" id="">
+            <label for="stock">Stocks:</label> <br>
+            <input type="text" name="stock" id="stock" required>
         </div>
         <div>
-            <label for="">Price: </label> <br>
-            <input type="text">
+            <label for="price">Price: </label> <br>
+            <input type="text" name="price" id="price" required>
         </div>
 
-        <div id="cc"><button class="btn confirm_btn" id="create_btn">Create</button></div>
-        <div id="cancel_cont"><button class="btn cancel_btn" id="cancel_btn">Cancel</button></div>
-            
+        <div id="cc">
+            <button class="btn confirm_btn" id="create_btn" type="submit" name="insert">Create</button>
+        </div>
+        <div id="cancel_cont">
+            <button class="btn cancel_btn" id="cancel_btn" type="button">Cancel</button>
+        </div>
+    </form>
 
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-
+    <!-- Sort and Create New Item -->
     <div class="container">
         <div class="sort">
             <label for="services" style="font-weight: bold;">Type:</label>
@@ -95,26 +93,10 @@
             <div class="item" style="border: 1px solid black;"></div>
             <div class="item" style="border: 1px solid black;"></div>
             <div class="item" style="border: 1px solid black;"></div>
-
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
-            <div class="item" style="border: 1px solid black;"></div>
         </div>
     </div>
     
 
     <script src="index.js"></script>
-</body>
+</body> 
 </html>
