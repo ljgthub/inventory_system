@@ -346,3 +346,50 @@ label {
     cursor: pointer;
     padding: 5px;
 }
+
+@media screen and (max-width: 1400px) {
+    .item_container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+    }
+
+    .item_form_show {
+        z-index: 3;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .item_container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+    }
+
+    .item_form_show {
+        z-index: 3;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sort {
+        display: none;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .item_container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(auto, 1fr);
+    }
+
+    #links:nth-child(2) {
+        display: none;
+    }
+
+    .item_form_show {
+        z-index: 3;
+    }
+}
+
+
