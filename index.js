@@ -51,20 +51,25 @@ Array.from(edit_btn).forEach(element => {
         const item_cont = parentDiv.parentElement;
         let item_content = item_cont.querySelector(".item_content");
         
-        let parts = item_content.children[0].src.split("/");
+        //let parts = item_content.children[0].src.split("/");
+        let source = item_content.children[0].src.match(/uploads\/(.*)/)[0];
         let item_price = item_content.children[5].querySelector("span").innerHTML.split("PHP");
-
-        document.getElementById('edit_image').value = parts[1];
+        document.getElementById('edit_image').value = "";
         document.getElementById('edit_id').value = item_content.children[2].querySelector("span").innerHTML;
         document.getElementById('edit_name').value = item_content.querySelector("span").innerHTML;
         document.getElementById('edit_type').value = item_content.children[3].querySelector("span").innerHTML;
         document.getElementById('edit_stock').value = item_content.children[4].querySelector("span").innerHTML;
         document.getElementById('edit_price').value = item_price[0];
 
+        document.getElementById('img_pic2').src = source;
+
+        source
+
         if (item_form.className == "item_form_show") {item_form.className = "item_form"}
 
         edit_form.className = "item_form_show"
-
+        img_pic2.style.visibility = "visible";
+        img_pic.style.visibility = "visible";
         
     })
 })
@@ -79,7 +84,6 @@ Array.from(item_content).forEach(element => {
         image.style.opacity = 0;
     }
 })
-
 
 
 delete_btn = document.getElementsByClassName("delete_btn");
@@ -106,27 +110,70 @@ document.getElementById("upload_image_btn").addEventListener("click", function()
     document.getElementById("image_input").click();
 });
 
+document.getElementById("upload_image_btn2").addEventListener("click", function() {
+    document.getElementById("edit_image").click();
+});
+
+document.getElementById("profile").addEventListener("click", function() {
+    let log = document.getElementById("logout")
+    if (log.style.display == "block") {
+        document.getElementById("logout").style.display = "none";
+        return
+    }
+    log.style.display = "block";
+})
+
+document.getElementById("logout").addEventListener("click", function() {
+    console.log("egg")
+    fetch('logout.php')
+        .then(response => {
+            if (response.ok) {
+                window.location.href = 'login.php'; 
+            }
+        })
+});
+
 document.getElementById("image_input").addEventListener("change", function(event) {
+    console.log("g")
     var fileName = event.target.files[0]?.name;  
     if (fileName) {
         console.log("Selected file: " + fileName);
         var reader = new FileReader();
         reader.onload = function(e) {
-            document.querySelector("#pic img").src = e.target.result; 
+            document.querySelector("#pic div img").src = e.target.result; 
         };
         reader.readAsDataURL(event.target.files[0]);
+
+        img_pic.style.visibility = "visible";
+        img_pic2.style.visibility = "visible";
     }
 });
 
+document.getElementById("edit_image").addEventListener("change", function(event) {
+
+    var fileName = event.target.files[0]?.name;  
+    if (fileName) {
+        console.log("Selected file: " + fileName);
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.querySelector("#pic2 div img").src = e.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+
+        img_pic.style.visibility = "visible";
+        img_pic2.style.visibility = "visible";
+    }
+});
+
+
+
 window.onload = function() {
     fetch('db.php')
-        .then(response => response.text())
-        .then(data => console.log("create db successful"));
+        .then(response => response.text());
 
 
     fetch('read.php')
-        .then(response => response.text())
-        .then(data => console.log("read successful"));
+        .then(response => response.text());
 };
 
 
@@ -289,7 +336,6 @@ function checkScreenWidth() {
             })
         }
     }
-
 }
 
 checkScreenWidth();

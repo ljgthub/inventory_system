@@ -9,15 +9,28 @@
 </head>
 <body>
 
+    <?php
+        session_start();
+
+        if (!isset($_SESSION['user'])) {
+            header("Location: login.php");
+            exit();
+        }
+    ?>
+
     <div id="nav">
         <span id="logo">Motorparts and Accessories</span>
         <div id="links">
             <span>Orders</span>
             <span>Sales</span>
             <span>Inventory</span>
-            <span><i class="fa-solid fa-user"></i></span>
+            <span id="profile">
+                <i class="fa-solid fa-user"></i> 
+            </span>
         </div>
     </div>
+
+    <div id="logout" style="display: none;"> <span id="logout_btn"><i class="fa-solid fa-right-from-bracket"></i>  Log Out</span> </div>
     
     <div id="search_div">
         <i class="fa-solid fa-search"></i>
@@ -28,10 +41,9 @@
     <form id="item_form" class="item_form_show" action="create.php" method="post" enctype="multipart/form-data">
         <h3>Create Item</h3>
         <div id="pic">
-            <img src="" alt="" style="width: 80%; height: 150px;">
-            <a style="font-size: 13px; font-weight: lighter;">(optional)</a> <br>
-            <button class="btn" id="upload_image_btn" type="button">Upload Image</button>
-            <input type="file" name="image" id="image_input" style="display: none;">
+            <div><img src="uploads" alt="" id="img_pic" style="width: 100%; height: 150px;"></div>
+            <button class="btn" id="upload_image_btn" type="button" style="margin-top: 10px;">Upload Image</button>
+            <input type="file" name="image" class="image_input" id="image_input" style="display: none;">
         </div>
         <div style="margin-top: 50px;">
             <label for="name">Item Name: </label> <br>
@@ -57,18 +69,17 @@
             <button class="btn confirm_btn" id="create_btn" type="submit" name="insert">Create</button>
         </div>
         <div id="cancel_cont">
-            <button class="btn cancel_btn" id="cancel_btn" type="button">Cancel</button>
+            <button class="cancel_btn" id="cancel_btn" type="button">Cancel</button>
         </div>
     </form>
 
     <!-- For edit item -->
     <form id="edit_form" class="item_form" action="edit.php" method="post" enctype="multipart/form-data">
         <h3>Update Item</h3>
-        <div id="pic">
-            <img src="" alt="" style="width: 80%; height: 150px;">
-            <a style="font-size: 13px; font-weight: lighter;">(optional)</a> <br>
-            <button class="btn" id="upload_image_btn" type="button">Upload Image</button>
-            <input type="file" name="image" id="edit_image" style="display: none;">
+        <div id="pic2">
+            <div><img src="uploads" alt="" id="img_pic2" style="width: 100%; height: 150px;"></div>
+            <button class="btn" id="upload_image_btn2" type="button" style="margin-top: 10px;">Upload Image</button>
+            <input type="file" name="image" class="image_input" id="edit_image" style="display: none;">
         </div>
 
         <input type="text" name="id" id="edit_id" style="display: none;">
@@ -97,7 +108,7 @@
             <button class="btn confirm_btn" id="edit_btn" type="submit" name="insert">Edit</button>
         </div>
         <div id="cancel_cont">
-            <button class="btn cancel_btn" id="edit_cancel_btn" type="button">Cancel</button>
+            <button class="cancel_btn" id="edit_cancel_btn" type="button">Cancel</button>
         </div>
     </form>
 
